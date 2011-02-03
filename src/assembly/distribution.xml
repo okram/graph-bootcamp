@@ -1,0 +1,36 @@
+<assembly>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <fileSets>
+        <fileSet>
+            <includes>
+                <include>pom.xml</include>
+                <include>README.textile</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>src</directory>
+        </fileSet>
+        <fileSet>
+            <directory>data</directory>
+        </fileSet>
+        <fileSet>
+            <directory>doc</directory>
+        </fileSet>
+        <fileSet>
+            <directory>target/site/apidocs</directory>
+        </fileSet>
+        <fileSet>
+            <directory>target/site</directory>
+        </fileSet>
+        <fileSet>
+            <directory>target/graph-${project.version}-standalone</directory>
+        </fileSet>
+        <fileSet>
+            <includes>
+                <include>target/graph-${project.version}.jar</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+</assembly>
