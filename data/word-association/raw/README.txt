@@ -1,3 +1,6 @@
+Nelson, D. L., McEvoy, C. L., & Schreiber, T. A. (1998).
+  The University of South Florida word association, rhyme, and word fragment norms. http://www.usf.edu/FreeAssociation/
+
 
 "The purpose of this WEB site is to make the largest database of free association ever collected in the
 United States available to interested researchers and scholars. More than 6,000 participants produced nearly
