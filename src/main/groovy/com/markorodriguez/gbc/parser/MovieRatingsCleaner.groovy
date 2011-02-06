@@ -28,11 +28,13 @@ class MovieRatingsCleaner {
     ElementHelper.removeProperty("NotMPAA", g.V);
     ElementHelper.renameProperty("Title", "name", g.V);
     ElementHelper.renameProperty("Release Year", "year", g.V);
+    ElementHelper.typecastProperty("year", Integer.class, g.V);
     ElementHelper.renameProperty("MPAA", "mpaa", g.V);
 
     println "Updating edge properties..."
     ElementHelper.removeProperty("NotPaul", g.E);
     ElementHelper.renameProperty("Rating", "rating", g.E);
+    ElementHelper.typecastProperty("rating", Integer.class, g.E);
     ElementHelper.removeProperty("_stp_id", g.E);
     ElementHelper.removeProperty("_stp_label", g.E);
     ElementHelper.removeProperty("Phantoms", g.E);
