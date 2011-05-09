@@ -4,6 +4,12 @@
         <format>dir</format>
     </formats>
     <includeBaseDirectory>false</includeBaseDirectory>
+    <files>
+        <file>
+            <source>properties.json</source>
+            <outputDirectory>/</outputDirectory>
+        </file>
+    </files>
 
     <fileSets>
         <fileSet>
