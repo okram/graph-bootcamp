@@ -1,0 +1,21 @@
+{
+        "GratefulDead" : {
+            "title" : "Steal My Face",
+            "graph" : "com.tinkerpop.blueprints.pgm.impls.tg.TinkerGraph",
+            "data" : "data/grateful-dead"
+        }
+
+        "MovieRatings" : {
+            "title" : "Dinner and a Movie",
+            "graph" : "com.tinkerpop.blueprints.pgm.impls.tg.TinkerGraph",
+            "data" : "data/movie-ratings"
+        }
+
+        "WordAssociation" : {
+            "title" : "Tower of Babel",
+            "graph" :  "com.tinkerpop.blueprints.pgm.impls.orientdb.OrientGraph",
+            "directory" : "local:/data/wordAssociation",
+            "data" : "data/word-association"
+
+        },
+}

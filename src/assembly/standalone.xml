@@ -7,6 +7,10 @@
 
     <fileSets>
         <fileSet>
+            <directory>data</directory>
+            <outputDirectory>/data</outputDirectory>
+        </fileSet>
+        <fileSet>
             <directory>src/main/bin</directory>
             <outputDirectory>/bin</outputDirectory>
             <fileMode>0755</fileMode>

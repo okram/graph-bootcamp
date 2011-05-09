@@ -1,1 +1,7 @@
-Graph bootcamp course material
+!https://github.com/okram/graph-bootcamp/raw/master/doc/images/graph-bootcamp-logo.png!
+
+Graph bootcamp is a lab-based graph systems workshop that teaches students how to model domains as graphs and solve domain-specific problems using graph traversals.
+All developers can gain value from attending, especially if they’ve been solving data modeling exclusively through relational databases.
+This workshop is all about heads-down development: light on one-to-many lecturing and heavy on coding and solution discovery.
+Students will use an open source graph stack to solve real-world problems over provided data sets (discussed below).
+Students will leave the bootcamp with code and inspiration pushing them to solve graph-related problems in their organization.

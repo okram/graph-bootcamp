@@ -1,7 +1,6 @@
 package com.markorodriguez.gbc.parser;
 
 import com.tinkerpop.blueprints.pgm.*;
-import com.tinkerpop.blueprints.pgm.impls.neo4j.Neo4jGraph;
 import com.tinkerpop.blueprints.pgm.util.IndexableGraphHelper;
 import com.tinkerpop.blueprints.pgm.util.graphml.GraphMLWriter;
 
@@ -14,9 +13,11 @@ import java.util.List;
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
  */
-public class WordAssociationParser {
+public class WordAssociationParser extends AbstractParser {
 
-    public WordAssociationParser(IndexableGraph graph) throws Exception {
+    public WordAssociationParser() throws Exception {
+        super("WordAssociation");
+        IndexableGraph graph = (IndexableGraph) this.getGraph();
         List<String> fileNames = Arrays.asList("Cue_Target_Pairs-A-B.txt", "Cue_Target_Pairs-C.txt", "Cue_Target_Pairs-D-F.txt", "Cue_Target_Pairs-G-K.txt", "Cue_Target_Pairs-L-O.txt", "Cue_Target_Pairs-P-R.txt", "Cue_Target_Pairs-S.txt", "Cue_Target_Pairs-T-Z.txt");
         int counter = 0;
         if (graph instanceof TransactionalGraph) {
@@ -57,6 +58,6 @@ public class WordAssociationParser {
     }
 
     public static void main(String[] args) throws Exception {
-        new WordAssociationParser(new Neo4jGraph("/tmp/wordgraph"));
+        new WordAssociationParser();
     }
 }
