@@ -38,8 +38,8 @@ class MovieRatingsParser extends AbstractParser {
 
         println "\tUpdating edge properties..."
         ElementHelper.removeProperty("NotPaul", g.E);
-        ElementHelper.renameProperty("Rating", "rating", g.E);
-        ElementHelper.typecastProperty("rating", Integer.class, g.E);
+        ElementHelper.renameProperty("Rating", "stars", g.E);
+        ElementHelper.typecastProperty("stars", Integer.class, g.E);
         ElementHelper.removeProperty("_stp_id", g.E);
         ElementHelper.removeProperty("_stp_label", g.E);
         ElementHelper.removeProperty("Phantoms", g.E);

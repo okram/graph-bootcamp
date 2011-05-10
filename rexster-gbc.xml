@@ -17,7 +17,7 @@
             <graph-file>/data/movieRatings</graph-file>
             <extensions>
                 <allows>
-                    <allow>gbc:cf</allow>
+                    <allow>gbc:collabFilter</allow>
                 </allows>
             </extensions>
             <properties>
