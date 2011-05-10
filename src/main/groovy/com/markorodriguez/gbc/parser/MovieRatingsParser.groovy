@@ -50,14 +50,15 @@ class MovieRatingsParser extends AbstractParser {
         List temp = [];
         g.E[[label: 'Rated']] >> temp;
         EdgeHelper.relabelEdges(g, temp, "rated");
-        temp = []
+        temp = [];
         g.E[[label: 'Directed By']] >> temp;
         EdgeHelper.relabelEdges(g, temp, "director");
+        temp = [];
         g.E[[label: 'ActedIn']] >> temp;
         EdgeHelper.relabelEdges(g, temp, "acted");
 
         GraphMLWriter.outputGraph(g, new FileOutputStream("data/movie-ratings/movie-graph.xml"));
-
+        g.shutdown();
     }
 
     public static void main(String[] args) {
