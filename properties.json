@@ -3,13 +3,13 @@
             "title" : "Steal My Face",
             "graph" : "com.tinkerpop.blueprints.pgm.impls.tg.TinkerGraph",
             "data" : "data/grateful-dead"
-        }
+        },
 
         "MovieRatings" : {
             "title" : "Dinner and a Movie",
             "graph" : "com.tinkerpop.blueprints.pgm.impls.tg.TinkerGraph",
             "data" : "data/movie-ratings"
-        }
+        },
 
         "WordAssociation" : {
             "title" : "Tower of Babel",
@@ -17,5 +17,5 @@
             "directory" : "local:/data/wordAssociation",
             "data" : "data/word-association"
 
-        },
+        }
 }

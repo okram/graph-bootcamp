@@ -41,12 +41,21 @@ public class Configuration {
         }
     }
 
+    public static String getGraphDataDirectory(final String project) {
+        try {
+            return (String) ((JSONObject) object.get(project)).get("data");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public String toString() {
         return object.toJSONString();
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         System.out.println(new Configuration().toString());
         System.out.println(new Configuration().getGraphClass("WordAssociation"));
-    }
+    }*/
 }
