@@ -1,6 +1,7 @@
-package com.markorodriguez.gbc.parser;
+package com.markorodriguez.gbc.word;
 
 import com.markorodriguez.gbc.Configuration;
+import com.markorodriguez.gbc.AbstractParser;
 import com.tinkerpop.blueprints.pgm.*;
 import com.tinkerpop.blueprints.pgm.util.IndexableGraphHelper;
 import com.tinkerpop.blueprints.pgm.util.TransactionalGraphHelper;

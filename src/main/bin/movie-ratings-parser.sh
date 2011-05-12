@@ -16,7 +16,7 @@ if [ "$JAVA_OPTIONS" = "" ] ; then
 fi
 
 
-$JAVA $JAVA_OPTIONS -cp $CP com.markorodriguez.gbc.parser.MovieRatingsParser
+$JAVA $JAVA_OPTIONS -cp $CP com.markorodriguez.gbc.movie.MovieRatingsParser
 
 
 # Return the program's exit code

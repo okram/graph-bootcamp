@@ -1,4 +1,4 @@
-package com.markorodriguez.gbc.parser;
+package com.markorodriguez.gbc;
 
 import com.markorodriguez.gbc.Configuration;
 import com.tinkerpop.blueprints.pgm.Graph;

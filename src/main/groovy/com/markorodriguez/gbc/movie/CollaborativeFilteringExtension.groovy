@@ -1,4 +1,4 @@
-package com.markorodriguez.gbc.extension.movie
+package com.markorodriguez.gbc.movie
 
 import com.tinkerpop.blueprints.pgm.Element
 import com.tinkerpop.blueprints.pgm.Graph

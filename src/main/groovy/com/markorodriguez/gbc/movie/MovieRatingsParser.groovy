@@ -1,4 +1,4 @@
-package com.markorodriguez.gbc.parser
+package com.markorodriguez.gbc.movie
 
 import com.tinkerpop.blueprints.pgm.IndexableGraph
 import com.tinkerpop.blueprints.pgm.util.EdgeHelper
@@ -6,6 +6,7 @@ import com.tinkerpop.blueprints.pgm.util.ElementHelper
 import com.tinkerpop.blueprints.pgm.util.graphml.GraphMLReader
 import com.tinkerpop.blueprints.pgm.util.graphml.GraphMLWriter
 import com.tinkerpop.gremlin.Gremlin
+import com.markorodriguez.gbc.AbstractParser
 
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
