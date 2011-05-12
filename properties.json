@@ -14,9 +14,15 @@
 
         "WordAssociation" : {
             "title" : "Tower of Babel",
-            "graph" :  "com.tinkerpop.blueprints.pgm.impls.orientdb.OrientGraph",
-            "directory" : "local:/data/wordAssociation",
+            "graph" : "com.tinkerpop.blueprints.pgm.impls.neo4j.Neo4jGraph",
+            "directory" : "/data/wordAssociation",
             "data" : "data/word-association"
 
-        }
+        },
+
+        "Enron" : {
+            "title" : "American Green",
+            "graph" : "com.tinkerpop.blueprints.pgm.impls.neo4j.Neo4jGraph",
+            "directory" : "/data/enron",
+        },
 }
