@@ -45,7 +45,7 @@ public class WordAssociationParser extends AbstractParser {
         manager.close();
 
         System.out.println("\nExporting to GraphML representation");
-        GraphMLWriter.outputGraph(graph, new FileOutputStream(Configuration.getGraphDataDirectory("WordAssociation") + "/word-graph.xml"));
+        GraphMLWriter.outputGraph(graph, new FileOutputStream(Configuration.getGraphDataDirectory("WordAssociation") + "/word-association.xml"));
         graph.shutdown();
     }
 

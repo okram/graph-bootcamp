@@ -57,7 +57,7 @@ class MovieRatingsParser extends AbstractParser {
         g.E[[label: 'ActedIn']] >> temp;
         EdgeHelper.relabelEdges(g, temp, "acted");
 
-        GraphMLWriter.outputGraph(g, new FileOutputStream("data/movie-ratings/movie-graph.xml"));
+        GraphMLWriter.outputGraph(g, new FileOutputStream("data/movie-ratings/movie-ratings.xml"));
         g.shutdown();
     }
 
