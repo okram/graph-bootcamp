@@ -11,12 +11,12 @@ import java.io.FileReader;
  */
 public class Configuration {
 
-    public static JSONObject object;
+    public static org.json.simple.JSONObject object;
 
     static {
         try {
             JSONParser parser = new JSONParser();
-            object = (JSONObject) parser.parse(new FileReader("properties.json"));
+            object = (org.json.simple.JSONObject) parser.parse(new FileReader("properties.json"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -25,7 +25,7 @@ public class Configuration {
 
     public static Class<? extends Graph> getGraphClass(final String project) {
         try {
-            return (Class<? extends Graph>) Class.forName((String) ((JSONObject) object.get(project)).get("graph"));
+            return (Class<? extends Graph>) Class.forName((String) ((org.json.simple.JSONObject) object.get(project)).get("graph"));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
