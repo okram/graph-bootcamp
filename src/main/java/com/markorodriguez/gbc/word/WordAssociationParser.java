@@ -1,56 +1,48 @@
 package com.markorodriguez.gbc.word;
 
-import com.markorodriguez.gbc.AbstractParser;
-import com.markorodriguez.gbc.Configuration;
-import com.tinkerpop.blueprints.pgm.*;
-import com.tinkerpop.blueprints.pgm.util.IndexableGraphHelper;
-import com.tinkerpop.blueprints.pgm.util.TransactionalGraphHelper;
-import com.tinkerpop.blueprints.pgm.util.graphml.GraphMLWriter;
+import com.tinkerpop.blueprints.Graph;
+import com.tinkerpop.blueprints.Vertex;
+import com.tinkerpop.blueprints.impls.tg.TinkerGraph;
+import com.tinkerpop.blueprints.util.GraphHelper;
+import com.tinkerpop.blueprints.util.io.graphml.GraphMLWriter;
 
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
  */
-public class WordAssociationParser extends AbstractParser {
+public class WordAssociationParser {
 
-    public WordAssociationParser() throws Exception {
-        super("WordAssociation");
-        IndexableGraph graph = (IndexableGraph) this.getGraph();
+    static String dir = "/Users/marko/Desktop/wordassociation/raw/";
+
+    public WordAssociationParser(Graph graph) throws Exception {
         List<String> fileNames = Arrays.asList("Cue_Target_Pairs-A-B.txt", "Cue_Target_Pairs-C.txt", "Cue_Target_Pairs-D-F.txt", "Cue_Target_Pairs-G-K.txt", "Cue_Target_Pairs-L-O.txt", "Cue_Target_Pairs-P-R.txt", "Cue_Target_Pairs-S.txt", "Cue_Target_Pairs-T-Z.txt");
-        TransactionalGraphHelper.CommitManager manager = TransactionalGraphHelper.createCommitManager((TransactionalGraph) graph, 1500);
-
         for (String fileName : fileNames) {
             System.out.println("\nProcessing " + fileName);
-            BufferedReader br = new BufferedReader(new FileReader(Configuration.getGraphDataDirectory("WordAssociation") + "/raw/" + fileName));
+            BufferedReader br = new BufferedReader(new FileReader(dir + fileName));
             String line;
             while (null != (line = br.readLine())) {
                 String[] entries = line.split(",");
-                Vertex a = IndexableGraphHelper.addUniqueVertex(graph, null, graph.getIndex(Index.VERTICES, Vertex.class), "word", entries[0].trim());
-                Vertex b = IndexableGraphHelper.addUniqueVertex(graph, null, graph.getIndex(Index.VERTICES, Vertex.class), "word", entries[1].trim());
-                if (!a.equals(b)) {
-                    Edge e = graph.addEdge(null, a, b, "similar_to");
-                    e.setProperty("weight", new Integer(entries[4].trim()));
-                    manager.incrCounter();
-                    if (manager.atCommit()) {
-                        System.out.print(".");
-                    }
-                }
+                Iterator<Vertex> hits = graph.getVertices("word", entries[0].trim()).iterator();
+                Vertex a = hits.hasNext() ? hits.next() : GraphHelper.addVertex(graph, null, "word", entries[0].trim());
+                hits = graph.getVertices("word", entries[1].trim()).iterator();
+                Vertex b = hits.hasNext() ? hits.next() : GraphHelper.addVertex(graph, null, "word", entries[1].trim());
+                if (!a.equals(b))
+                    graph.addEdge(null, a, b, "similarTo").setProperty("weight", new Integer(entries[4].trim()));
             }
         }
 
-        manager.close();
-
         System.out.println("\nExporting to GraphML representation");
-        GraphMLWriter.outputGraph(graph, new FileOutputStream(Configuration.getGraphDataDirectory("WordAssociation") + "/word-association.xml"));
+        GraphMLWriter.outputGraph(graph, new FileOutputStream(dir + "word-association.xml"));
         graph.shutdown();
     }
 
     public static void main(String[] args) throws Exception {
-        new WordAssociationParser();
+        new WordAssociationParser(new TinkerGraph());
     }
 }

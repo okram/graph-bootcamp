@@ -1,4 +1,6 @@
-By accepting this software you agree to not distribute via an medium/media and will only use this software for your educational purposes. The material contained herein is the property of the Graph Bootcamp lecture series.
+By accepting this software you agree to not distribute via an medium/media and
+will only use this software for your educational purposes.
+The material contained herein is the property of the Graph Bootcamp lecture series.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED

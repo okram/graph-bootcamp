@@ -1,4 +1,0 @@
-The Enron dataset is available at
-    http://www.infochimps.com/datasets/enron-email-data-with-manager-subordinate-relationship-metadata
-
-This dataset is public domain.
