@@ -1,4 +1,4 @@
-package com.markorodriguez.gbc.word;
+package com.thinkaurelius.bootcamp.word;
 
 import com.tinkerpop.blueprints.Graph;
 import com.tinkerpop.blueprints.Vertex;
@@ -14,7 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * @author Marko A. Rodriguez (http://markorodriguez.com)
+ * @author Marko A. Rodriguez (http://thinkaurelius.com)
  */
 public class WordAssociationParser {
 

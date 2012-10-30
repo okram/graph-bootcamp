@@ -16,7 +16,7 @@ if [ "$JAVA_OPTIONS" = "" ] ; then
 fi
 
 
-$JAVA $JAVA_OPTIONS -cp $CP com.markorodriguez.gbc.word.WordAssociationParser
+$JAVA $JAVA_OPTIONS -cp $CP com.thinkaurelius.bootcamp.word.WordAssociationParser
 
 
 # Return the program's exit code

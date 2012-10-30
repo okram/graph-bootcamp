@@ -1,4 +1,4 @@
-package com.markorodriguez.gbc.movie
+package com.thinkaurelius.bootcamp.movie
 
 import com.thinkaurelius.titan.core.TitanFactory
 import com.tinkerpop.blueprints.Graph
@@ -7,7 +7,7 @@ import com.tinkerpop.blueprints.Vertex
 import com.tinkerpop.gremlin.groovy.Gremlin
 
 /**
- * @author Marko A. Rodriguez (http://markorodriguez.com)
+ * @author Marko A. Rodriguez (http://thinkaurelius.com)
  */
 class MovieLensParser {
 
