@@ -1,9 +1,11 @@
 package com.thinkaurelius.bootcamp.movie
 
 import com.thinkaurelius.titan.core.TitanFactory
+import com.thinkaurelius.titan.core.TitanType
 import com.tinkerpop.blueprints.Graph
 import com.tinkerpop.blueprints.TransactionalGraph
 import com.tinkerpop.blueprints.Vertex
+import com.tinkerpop.blueprints.util.wrappers.batch.BatchGraph
 import com.tinkerpop.gremlin.groovy.Gremlin
 
 /**
@@ -12,6 +14,7 @@ import com.tinkerpop.gremlin.groovy.Gremlin
 class MovieLensParser {
 
     static String dir = '/home/ubuntu/ml-1m/';
+    //static String dir = '/Users/marko/Desktop/ml-1m/';
     static Map occupations;
 
     static {
@@ -25,8 +28,8 @@ class MovieLensParser {
 
     }
 
-    public MovieLensParser(TransactionalGraph g) throws Exception {
-
+    public MovieLensParser(BatchGraph g) throws Exception {
+        g.setVertexIdKey("uid");
         long counter = 0l;
 
         println 'Processing movies.dat...'
@@ -36,15 +39,13 @@ class MovieLensParser {
             int movieId = new Integer(components[0]);
             String movieTitle = new String(components[1]);
             String genres = new String(components[2]);
-            Vertex movieVertex = g.addVertex(['movieId': movieId, 'name': movieTitle, 'type': 'movie']);
+            Vertex movieVertex = g.addVertex('m' + movieId, ['movieId': movieId, 'name': movieTitle, 'type': 'movie']);
             //println(movieId + " " + movieTitle + " " + generas);
             for (String genre: Arrays.asList(genres.split('\\|'))) {
-                Iterator<Vertex> hits = g.V('name', genre).iterator();
-                Vertex genreVertex = hits.hasNext() ? hits.next() : g.addVertex(['type': 'genre', 'name': genre]);
+                Vertex genreVertex = g.v('g' + genre) != null ? g.v('g' + genre) : g.addVertex('g' + genre, ['type': 'genre', 'name': genre]);
                 g.addEdge(movieVertex, genreVertex, "genre");
             }
         }
-        g.stopTransaction(TransactionalGraph.Conclusion.SUCCESS)
 
         println 'Processing users.dat...'
         // UserID::Gender::Age::Occupation::Zip-code
@@ -55,18 +56,10 @@ class MovieLensParser {
             int userAge = new Integer(components[2]);
             String userOccupation = occupations.get(new Integer(components[3]));
             //println(userId + " " + userGender + " " + userAge + " " + userOccupation);
-            Vertex userVertex = g.addVertex(['type': 'person', 'userId': userId, 'gender': userGender, 'age': userAge]);
-
-            Iterator<Vertex> hits = g.V('name', userOccupation).iterator();
-            Vertex occupationVertex;
-            if (hits.hasNext()) {
-                occupationVertex = hits.next();
-            } else {
-                occupationVertex = g.addVertex([type: 'occupation', name: userOccupation]);
-            }
+            Vertex userVertex = g.addVertex('p' + userId, ['type': 'person', 'userId': userId, 'gender': userGender, 'age': userAge]);
+            Vertex occupationVertex = g.v('o' + userOccupation) != null ? g.v('o' + userOccupation) : g.addVertex('o' + userOccupation, [type: 'occupation', name: userOccupation]);
             g.addEdge(userVertex, occupationVertex, "occupation");
         }
-        g.stopTransaction(TransactionalGraph.Conclusion.SUCCESS)
 
         println 'Processing ratings.dat...'
         // UserID::MovieID::Rating::Timestamp
@@ -75,23 +68,26 @@ class MovieLensParser {
             int userId = new Integer(components[0]);
             int movieId = new Integer(components[1]);
             int stars = new Integer(components[2]);
+            long time = new Long(components[3]);
 
             // println(userId + " " + movieId + " " + stars);
-            g.addEdge(g.V('userId', userId).next(), g.V('movieId', movieId).next(), "rated", [stars: stars]);
-            if (counter++ % 50000 == 0) {
+            g.addEdge(g.v('p' + userId), g.v('m' + movieId), 'rated', [stars: stars, time: time]);
+            if (counter++ % 25000 == 0) {
                 System.out.println('Ratings edges processed: ' + counter);
-                g.stopTransaction(TransactionalGraph.Conclusion.SUCCESS)
             }
         }
     }
 
     public static void main(String[] args) {
-        Graph g = TitanFactory.open(dir + 'movielens');
+        //Graph g = TitanFactory.open(dir + 'movielens');
+        Graph g = TitanFactory.open('bin/hbase.local');
         g.createKeyIndex('name', Vertex.class);
         g.createKeyIndex('userId', Vertex.class);
         g.createKeyIndex('movieId', Vertex.class);
+        TitanType time = g.makeType().name('time').simple().functional(false).dataType(Long.class).makePropertyKey();
+        g.makeType().name('rated').primaryKey(time).makeEdgeLabel();
         g.stopTransaction(TransactionalGraph.Conclusion.SUCCESS);
-        new MovieLensParser(g);
+        new MovieLensParser(new BatchGraph(g, BatchGraph.IdType.STRING, 25000));
         g.shutdown();
     }
 }
