@@ -15,6 +15,11 @@ class MovieLensParser {
 
     static String dir = '/home/ubuntu/ml-1m/';
     //static String dir = '/Users/marko/Desktop/ml-1m/';
+
+    static String open = 'bin/hbase.local';
+    //static String open = dir + 'movielens';
+
+
     static Map occupations;
 
     static {
@@ -79,8 +84,8 @@ class MovieLensParser {
     }
 
     public static void main(String[] args) {
-        //Graph g = TitanFactory.open(dir + 'movielens');
-        Graph g = TitanFactory.open('bin/hbase.local');
+        //Graph g = TitanFactory.open(open);
+        Graph g = TitanFactory.open(open);
         g.createKeyIndex('name', Vertex.class);
         g.createKeyIndex('userId', Vertex.class);
         g.createKeyIndex('movieId', Vertex.class);
